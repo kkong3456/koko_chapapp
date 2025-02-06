@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:koko_chatapp/auth/auth_service.dart';
 import 'package:koko_chatapp/components/my_button.dart';
 import 'package:koko_chatapp/components/my_testfield.dart';
 
@@ -14,7 +15,28 @@ class RegisterPage extends StatelessWidget {
 
   final void Function()? onTap;
 
-  void register() {}
+  void register(BuildContext context) {
+    //get auth service
+    final _auth = AuthService();
+    if (_pwController.text == _confirmPwController.text) {
+      try {
+        _auth.signInWithEmailPassword(
+            _emailController.text, _pwController.text);
+      } catch (e) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(title: Text(e.toString())),
+        );
+      }
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+          title: Text('Passwords do not match'),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +88,7 @@ class RegisterPage extends StatelessWidget {
             //login button
             MyButton(
               text: "Register",
-              onTap: register,
+              onTap: () => register(context),
             ),
 
             const SizedBox(height: 10),
