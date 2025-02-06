@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "696098377855",
+    "project_id": "koko-chatapp",
+    "storage_bucket": "koko-chatapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696098377855:android:3203423d20a5f08218af4a",
+        "android_client_info": {
+          "package_name": "com.example.koko_chatapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4DpC4PQX7kdNxDlI430tuW1o3QkCuEXQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

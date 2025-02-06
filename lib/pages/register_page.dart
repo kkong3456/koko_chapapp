@@ -3,11 +3,16 @@ import 'package:koko_chatapp/components/my_button.dart';
 import 'package:koko_chatapp/components/my_testfield.dart';
 
 class RegisterPage extends StatelessWidget {
-  RegisterPage({super.key});
+  RegisterPage({
+    super.key,
+    required this.onTap,
+  });
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwController = TextEditingController();
   final TextEditingController _confirmPwController = TextEditingController();
+
+  final void Function()? onTap;
 
   void register() {}
 
@@ -74,11 +79,14 @@ class RegisterPage extends StatelessWidget {
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.primary),
                 ),
-                Text(
-                  'Login now',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
+                GestureDetector(
+                  onTap: onTap,
+                  child: Text(
+                    'Login now',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
               ],

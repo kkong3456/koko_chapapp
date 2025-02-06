@@ -1,17 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:koko_chatapp/auth/auth_service.dart';
 import 'package:koko_chatapp/components/my_button.dart';
 import 'package:koko_chatapp/components/my_testfield.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwController = TextEditingController();
+  final void Function()? onTap;
 
-  LoginPage({super.key});
+  LoginPage({
+    super.key,
+    this.onTap,
+  });
+
+  void login(BuildContext context) async {
+    final authService = AuthService();
+    try {
+      await authService.signInWithEmailPassword(
+        _emailController.text,
+        _pwController.text,
+      );
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(title: Text(e.toString())),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    void login() {}
-
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
@@ -53,7 +71,7 @@ class LoginPage extends StatelessWidget {
             //login button
             MyButton(
               text: "Login",
-              onTap: login,
+              onTap: () => login(context),
             ),
 
             const SizedBox(height: 10),
@@ -66,11 +84,14 @@ class LoginPage extends StatelessWidget {
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.primary),
                 ),
-                Text(
-                  'Register now',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
+                GestureDetector(
+                  onTap: onTap,
+                  child: Text(
+                    'Register now',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
               ],
